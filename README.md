@@ -62,15 +62,6 @@ Built with simplicity and usability in mind, it is ideal for:
 
 ---
 
-## 🖼️ Screenshots (Recommended)
-
-> Add screenshots here after setup:
-
-* Dashboard view
-* Income records page
-* Expense records page
-* Add Income form
-* Add Expense form
 
 ---
 
