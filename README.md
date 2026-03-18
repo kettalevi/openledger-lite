@@ -1,5 +1,5 @@
 # 💼 OpenLedger Lite
-
+![OpenLedger Banner](assets/screenshots/banner.png)
 > A simple, elegant, and open-source financial tracking system for individuals, NGOs, and small teams.
 
 ![PHP](https://img.shields.io/badge/PHP-8+-blue)
