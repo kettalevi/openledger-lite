@@ -1,19 +1,21 @@
-# openledger-lite
-Open-source financial tracker for individuals, NGOs, and small teams.
 # 💼 OpenLedger Lite
 
 > A simple, elegant, and open-source financial tracking system for individuals, NGOs, and small teams.
 
+![PHP](https://img.shields.io/badge/PHP-8+-blue)
+![MySQL](https://img.shields.io/badge/MySQL-Database-orange)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-UI-teal)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
 ## 🌍 Overview
 
-**OpenLedger Lite** is a lightweight financial management system designed to help users track:
+**OpenLedger Lite** is a lightweight financial management system designed to help users:
 
-* 💰 Income
-* 💸 Expenses
-* 📊 Financial performance
+* 💰 Track income
+* 💸 Manage expenses
+* 📊 Visualize financial performance
 
 Built with simplicity and usability in mind, it is ideal for:
 
@@ -21,6 +23,32 @@ Built with simplicity and usability in mind, it is ideal for:
 * NGOs tracking funds and donations
 * Small businesses monitoring cash flow
 * Community groups and savings clubs
+
+---
+
+## 🖼️ Screenshots
+
+### 📊 Dashboard
+
+![Dashboard](assets/screenshots/dashboard.png)
+
+---
+
+### 💰 Income Management
+
+![Income](assets/screenshots/income.png)
+
+---
+
+### 💸 Expense Management
+
+![Expenses](assets/screenshots/expenses.png)
+
+---
+
+### ➕ Add Income
+
+![Add Income](assets/screenshots/add-income.png)
 
 ---
 
@@ -62,9 +90,6 @@ Built with simplicity and usability in mind, it is ideal for:
 
 ---
 
-
----
-
 ## ⚙️ Installation
 
 ### 1. Clone the repository
@@ -78,13 +103,13 @@ cd openledger-lite
 
 ### 2. Setup Database
 
-* Create a database:
+Create database:
 
 ```
 openledger_lite
 ```
 
-* Import:
+Import:
 
 ```
 database.sql
@@ -111,7 +136,7 @@ define('DB_PASS', '');
 
 ### 4. Create First User
 
-Run this once:
+Run once:
 
 ```php
 <?php
@@ -121,15 +146,13 @@ $password = password_hash("admin123", PASSWORD_DEFAULT);
 
 $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)")
      ->execute(["Admin", "admin@test.com", $password]);
-
-echo "User created!";
 ```
 
 ---
 
 ### 5. Run the Project
 
-Open in browser:
+Open:
 
 ```
 http://localhost/openledger-lite
@@ -137,8 +160,8 @@ http://localhost/openledger-lite
 
 Login:
 
-* Email: `admin@test.com`
-* Password: `admin123`
+* Email: [admin@test.com](mailto:admin@test.com)
+* Password: admin123
 
 ---
 
@@ -153,13 +176,14 @@ openledger-lite/
 ├── expenses/
 ├── includes/
 ├── assets/
+│   └── screenshots/
 ├── database.sql
 └── README.md
 ```
 
 ---
 
-## 🚀 Roadmap (Future Enhancements)
+## 🚀 Roadmap
 
 * 📤 CSV Export
 * 📄 PDF Reports
@@ -190,8 +214,6 @@ Most financial tools are either:
 ## 🤝 Contributing
 
 Contributions are welcome!
-
-If you’d like to improve this project:
 
 * Fork the repo
 * Create a feature branch
@@ -229,4 +251,3 @@ If you find this project useful:
 A premium version with advanced features (multi-user, reporting, integrations) is under development.
 
 Stay tuned 🚀
-
