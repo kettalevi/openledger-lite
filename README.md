@@ -70,7 +70,7 @@ Built with simplicity and usability in mind, it is ideal for:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/openledger-lite.git
+git clone https://github.com/kettalevi/openledger-lite.git
 cd openledger-lite
 ```
 
