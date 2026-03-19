@@ -1,5 +1,5 @@
 <?php
-require '../db.php';
+require 'db.php';
 //use this file to create a default user. Delete immediately after.
 $password = password_hash("admin123", PASSWORD_DEFAULT);
 
