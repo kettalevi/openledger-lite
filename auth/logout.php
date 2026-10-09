@@ -1,44 +1,18 @@
 <?php
-require_once '../includes/db.php';
+require_once '../includes/functions.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-    $stmt->execute([$email]);
-    $user = $stmt->fetch();
-
-    if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['user_id'] = $user['id'];
-        header("Location: /dashboard/index.php");
-        exit;
-    } else {
-        $error = "Invalid login";
-    }
+// Logout requires POST + CSRF token so other sites can't log users out.
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    redirect('dashboard/index.php');
 }
-if (isset($_GET['logged_out'])) {
-    echo "<p class='text-green-600 mb-3'>You have been logged out.</p>";
+csrf_check();
+
+$_SESSION = [];
+if (ini_get('session.use_cookies')) {
+    $p = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000, $p['path'], $p['domain'], $p['secure'], $p['httponly']);
 }
-?>
+session_destroy();
 
-<!DOCTYPE html>
-<html>
-<head>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-
-<form method="POST" class="bg-white p-6 rounded shadow w-80">
-    <h2 class="text-xl mb-4 font-bold">Login</h2>
-
-    <?php if (!empty($error)) echo "<p class='text-red-500'>$error</p>"; ?>
-
-    <input type="email" name="email" placeholder="Email" required class="w-full mb-3 p-2 border rounded">
-    <input type="password" name="password" placeholder="Password" required class="w-full mb-3 p-2 border rounded">
-
-    <button class="bg-blue-600 text-white w-full p-2 rounded">Login</button>
-</form>
-
-</body>
-</html>
+header('Location: ' . url('auth/login.php?logged_out=1'));
+exit;
