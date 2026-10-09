@@ -65,7 +65,9 @@ Built with simplicity and usability in mind, it is ideal for:
 * Add income entries
 * Dynamic source creation (auto-add new sources)
 * Contributor tracking
-* Date filtering
+* Edit and delete entries
+* Date, source and text filtering with pagination
+* CSV export of the filtered results
 * Summary cards
 
 ### 💸 Expense Management
@@ -73,14 +75,16 @@ Built with simplicity and usability in mind, it is ideal for:
 * Add expenses
 * Dynamic category creation
 * Description support
-* Date filtering
+* Edit and delete entries
+* Date, category and text filtering with pagination
+* CSV export of the filtered results
 * Summary cards
 
 ### 🔐 Authentication
 
-* Simple login system
-* Secure session handling
-* Logout functionality
+* Login with hashed passwords, session-ID regeneration and brute-force throttling
+* CSRF protection on every state-changing form, POST-only logout
+* Output escaping and strict server-side validation
 
 ### 📁 Clean Architecture
 
@@ -119,33 +123,27 @@ database.sql
 
 ### 3. Configure Database
 
-Edit:
-
-```
-includes/config.php
-```
+Edit `includes/config.php`, or (recommended) create a git-ignored `includes/config.local.php`:
 
 ```php
+<?php
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'openledger_lite');
 define('DB_USER', 'root');
 define('DB_PASS', '');
+define('CURRENCY', 'UGX');   // shown across the app
 ```
+
+Environment variables `OL_DB_HOST`, `OL_DB_NAME`, `OL_DB_USER`, `OL_DB_PASS`, `OL_CURRENCY` and `OL_BASE_URL` also work.
 
 ---
 
 ### 4. Create First User
 
-Run once:
+From the command line (the password is hashed, min. 8 characters):
 
-```php
-<?php
-require 'includes/db.php';
-
-$password = password_hash("admin123", PASSWORD_DEFAULT);
-
-$conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)")
-     ->execute(["Admin", "admin@test.com", $password]);
+```bash
+php bin/create-user.php "Admin" you@example.com
 ```
 
 ---
@@ -158,10 +156,7 @@ Open:
 http://localhost/openledger-lite
 ```
 
-Login:
-
-* Email: [admin@test.com](mailto:admin@test.com)
-* Password: admin123
+Log in with the user you created in step 4.
 
 ---
 
@@ -185,7 +180,6 @@ openledger-lite/
 
 ## 🚀 Roadmap
 
-* 📤 CSV Export
 * 📄 PDF Reports
 * 🏦 Bank Account Integration
 * 👥 Multi-user roles

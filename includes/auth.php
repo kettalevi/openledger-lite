@@ -1,5 +1,6 @@
 <?php
-if (!isset($_SESSION['user_id'])) {
-    header("Location: /auth/login.php");
-    exit;
+require_once __DIR__ . '/functions.php';
+
+if (empty($_SESSION['user_id'])) {
+    redirect('auth/login.php');
 }
